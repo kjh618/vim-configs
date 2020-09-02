@@ -1,5 +1,7 @@
 " kjh's .vimrc
 
+set nocompatible
+
 syntax on
 filetype plugin indent on
 
