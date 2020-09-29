@@ -16,7 +16,6 @@ set mouse=a
 set history=200
 
 " Editor
-set showmatch
 set backspace=indent,eol,start
 set hidden
 set autoread
