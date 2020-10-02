@@ -9,8 +9,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -29,6 +28,7 @@ set mouse=a
 
 " Line number
 set number
+set relativenumber
 
 " Use four spaces instead of a tab
 set shiftwidth=4
@@ -49,15 +49,30 @@ set hidden
 set termguicolors
 
 let g:gruvbox_italic = 1
+"let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0
-"autocmd vimenter * colorscheme gruvbox
 colorscheme gruvbox
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline
+" lightline.vim
 
-let g:airline_theme = 'gruvbox'
+set noshowmode
+
+let g:lightline = {
+  \   'colorscheme': 'jellybeans',
+  \   'active': {
+  \     'left': [ [ 'mode', 'paste' ],
+  \               [ 'readonly', 'filename', 'modified' ],
+  \               [ 'cocstatus' ] ],
+  \     'right': [ [ 'lineinfo' ],
+  \                [ 'percent' ],
+  \                [ 'filetype' ] ]
+  \   },
+  \   'component_function': {
+  \     'cocstatus': 'coc#status'
+  \   },
+  \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -188,7 +203,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
