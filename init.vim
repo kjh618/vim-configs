@@ -42,6 +42,9 @@ set smartcase
 " Don't unload but instead hide a buffer
 set hidden
 
+" Keep a few lines visible around the cursor
+set scrolloff=5
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Color Scheme
@@ -68,6 +71,9 @@ let g:lightline = {
   \     'right': [ [ 'lineinfo' ],
   \                [ 'percent' ],
   \                [ 'filetype' ] ]
+  \   },
+  \   'inactive': {
+  \     'left' : [ [ 'filename', 'modified' ] ]
   \   },
   \   'component_function': {
   \     'cocstatus': 'coc#status'
