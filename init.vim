@@ -11,7 +11,7 @@ Plug 'morhetz/gruvbox'
 
 Plug 'itchyny/lightline.vim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
@@ -19,6 +19,8 @@ call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Default Configs
+
+" TODO: Add configs from ./.vimrc
 
 syntax on
 filetype plugin indent on
@@ -65,12 +67,16 @@ set noshowmode
 let g:lightline = {
   \   'colorscheme': 'jellybeans',
   \   'active': {
-  \     'left': [ [ 'mode', 'paste' ],
-  \               [ 'readonly', 'filename', 'modified' ],
-  \               [ 'cocstatus' ] ],
-  \     'right': [ [ 'lineinfo' ],
-  \                [ 'percent' ],
-  \                [ 'filetype' ] ]
+  \     'left': [ 
+  \       [ 'mode', 'paste' ],
+  \       [ 'readonly', 'filename', 'modified' ],
+  \       [ 'cocstatus' ]
+  \     ],
+  \     'right': [
+  \       [ 'lineinfo' ],
+  \       [ 'percent' ],
+  \       [ 'filetype' ]
+  \     ]
   \   },
   \   'inactive': {
   \     'left' : [ [ 'filename', 'modified' ] ]
@@ -109,9 +115,9 @@ set signcolumn=yes
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
