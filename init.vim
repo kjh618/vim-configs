@@ -9,6 +9,8 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
 
+Plug 'preservim/nerdtree'
+
 Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -47,6 +49,12 @@ set hidden
 " Keep a few lines visible around the cursor
 set scrolloff=5
 
+" Window movement
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Color Scheme
@@ -57,6 +65,12 @@ let g:gruvbox_italic = 1
 "let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0
 colorscheme gruvbox
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+
+map <C-n> :NERDTreeToggle<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
