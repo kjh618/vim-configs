@@ -35,9 +35,9 @@ set number
 set relativenumber
 
 " Use four spaces instead of a tab
+set expandtab
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 
 " Search
 set ignorecase

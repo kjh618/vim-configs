@@ -1,5 +1,6 @@
 #!/bin/bash
 
-cp init.vim ~/.config/nvim/
-cp .vimrc ~/
+#cp -v .vimrc ~/
+
+cp -v init.vim ~/.config/nvim/
 
