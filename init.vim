@@ -7,7 +7,7 @@
 
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
 
 Plug 'preservim/nerdtree'
 
@@ -61,11 +61,9 @@ noremap <C-l> <C-w>l
 
 set termguicolors
 
-"let g:gruvbox_italic = 1
-"let g:gruvbox_invert_selection = 0
-"colorscheme gruvbox
-
-colorscheme onedark
+let g:gruvbox_italic = 1
+let g:gruvbox_invert_selection = 0
+colorscheme gruvbox
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,10 +77,13 @@ map <C-n> :NERDTreeToggle<CR>
 
 set noshowmode
 
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 let g:lightline = {
-  \   'colorscheme': 'one',
+  \   'colorscheme': 'jellybeans',
   \   'active': {
-  \     'left': [ 
+  \     'left': [
   \       [ 'mode', 'paste' ],
   \       [ 'readonly', 'filename', 'modified' ],
   \       [ 'cocstatus' ]
