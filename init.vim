@@ -7,7 +7,7 @@
 
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 
 Plug 'preservim/nerdtree'
 
@@ -61,10 +61,11 @@ noremap <C-l> <C-w>l
 
 set termguicolors
 
-let g:gruvbox_italic = 1
-"let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = 0
-colorscheme gruvbox
+"let g:gruvbox_italic = 1
+"let g:gruvbox_invert_selection = 0
+"colorscheme gruvbox
+
+colorscheme onedark
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,7 +80,7 @@ map <C-n> :NERDTreeToggle<CR>
 set noshowmode
 
 let g:lightline = {
-  \   'colorscheme': 'jellybeans',
+  \   'colorscheme': 'one',
   \   'active': {
   \     'left': [ 
   \       [ 'mode', 'paste' ],
