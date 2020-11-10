@@ -8,6 +8,8 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
+Plug 'hzchirs/vim-material'
+" TODO: Use `kaicataldo/material.vim` instead?
 
 Plug 'preservim/nerdtree'
 
@@ -61,9 +63,13 @@ noremap <C-l> <C-w>l
 
 set termguicolors
 
-let g:gruvbox_italic = 1
-let g:gruvbox_invert_selection = 0
-colorscheme gruvbox
+"let g:gruvbox_italic = 1
+"let g:gruvbox_invert_selection = 0
+"colorscheme gruvbox
+
+colorscheme vim-material
+highlight Todo guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+highlight Search gui=reverse cterm=reverse
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,7 +87,7 @@ set noshowmode
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 let g:lightline = {
-  \   'colorscheme': 'jellybeans',
+  \   'colorscheme': 'one',
   \   'active': {
   \     'left': [
   \       [ 'mode', 'paste' ],
