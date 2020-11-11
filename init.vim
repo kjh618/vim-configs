@@ -26,8 +26,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Default Configs
 
-" Add configs from ./.vimrc?
-
 syntax on
 filetype plugin indent on
 
