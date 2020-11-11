@@ -105,6 +105,13 @@ let g:lightline = {
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" vim-lsp-cxx-highlight
+
+" Remove highlighting for struct fields
+autocmd User CocNvimInit highlight LspCxxHlGroupMemberVariable ctermfg=NONE guifg=NONE
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc.nvim
 
 " TextEdit might fail if hidden is not set.
