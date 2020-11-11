@@ -8,7 +8,6 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
 Plug 'preservim/nerdtree'
 
@@ -63,14 +62,9 @@ noremap <C-l> <C-w>l
 set termguicolors
 set background=dark
 
-"let g:gruvbox_italic = 1
-"let g:gruvbox_invert_selection = 0
-"colorscheme gruvbox
-
-let g:material_terminal_italics = 1
-colorscheme material
-highlight Visual guifg=NONE guibg=#3d5159 ctermfg=NONE
-highlight MatchParen guifg=NONE guibg=#3d5159 ctermfg=NONE 
+let g:gruvbox_italic = 1
+let g:gruvbox_invert_selection = 0
+colorscheme gruvbox
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,7 +82,7 @@ set noshowmode
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 let g:lightline = {
-  \   'colorscheme': 'material_vim',
+  \   'colorscheme': 'gruvbox',
   \   'active': {
   \     'left': [
   \       [ 'mode', 'paste' ],
