@@ -3,5 +3,5 @@
 #cp -v .vimrc ~/
 
 cp -v init.vim ~/.config/nvim/
-# TODO: Add coc-settings.json
+cp -v coc-settings.json ~/.config/nvim/
 

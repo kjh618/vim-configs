@@ -23,7 +23,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Default Configs
 
-" TODO: Add configs from ./.vimrc
+" Add configs from ./.vimrc?
 
 syntax on
 filetype plugin indent on
