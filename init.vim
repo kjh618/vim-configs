@@ -51,6 +51,12 @@ set hidden
 " Keep a few lines visible around the cursor
 set scrolloff=2
 
+" Folding
+set foldmethod=syntax
+set foldlevelstart=99
+set foldnestmax=1
+set foldcolumn=1
+
 " Window movement
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
