@@ -15,6 +15,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -67,13 +68,13 @@ noremap <C-l> <C-w>l
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " vim-highlightedyank
 
-let g:highlightedyank_highlight_duration = 300
+let g:highlightedyank_highlight_duration = 200
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " fzf
 
-noremap <C-p> :Files<CR>
+noremap <C-p> :GFiles --cached --others --exclude-standard<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,6 +92,10 @@ colorscheme gruvbox
 " nerdtree
 
 noremap <C-n> :NERDTreeToggle<CR>
+
+let NERDTreeShowHidden = 1
+
+let g:NERDTreeGitStatusConcealBrackets = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
