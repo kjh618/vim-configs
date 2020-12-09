@@ -16,6 +16,7 @@ Plug 'morhetz/gruvbox'
 
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -89,7 +90,7 @@ colorscheme gruvbox
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree
+" NERDTree
 
 noremap <C-n> :NERDTreeToggle<CR>
 
