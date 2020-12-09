@@ -65,6 +65,8 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+let c_syntax_for_h = 1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " vim-highlightedyank
