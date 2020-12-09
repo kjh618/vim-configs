@@ -94,6 +94,7 @@ colorscheme gruvbox
 noremap <C-n> :NERDTreeToggle<CR>
 
 let NERDTreeShowHidden = 1
+let NERDTreeIgnore = [ '^\.git$[[dir]]' ]
 
 let g:NERDTreeGitStatusConcealBrackets = 1
 
