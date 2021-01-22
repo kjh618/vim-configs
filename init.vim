@@ -12,7 +12,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -86,9 +86,8 @@ noremap <C-p> :GFiles --cached --others --exclude-standard<CR>
 set termguicolors
 set background=dark
 
-let g:gruvbox_italic = 1
-let g:gruvbox_invert_selection = 0
-colorscheme gruvbox
+let g:gruvbox_material_palette = 'original'
+colorscheme gruvbox-material
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -113,7 +112,7 @@ set noshowmode
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 let g:lightline = {
-  \   'colorscheme': 'gruvbox',
+  \   'colorscheme': 'gruvbox_material',
   \   'active': {
   \     'left': [
   \       [ 'mode', 'paste' ],
