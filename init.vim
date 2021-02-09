@@ -3,30 +3,32 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" vim-plug Plugins
+" vim-plug Plugins {{{
 
 call plug#begin(stdpath('data') . '/plugged')
-
-Plug 'machakann/vim-highlightedyank'
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
 Plug 'sainnhe/gruvbox-material'
 
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'machakann/vim-highlightedyank'
+
 Plug 'itchyny/lightline.vim'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
 
+" }}}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Default Configs
+" Default Configs {{{
 
 syntax on
 filetype plugin indent on
@@ -56,8 +58,8 @@ set scrolloff=2
 " Folding
 set foldmethod=syntax
 set foldlevelstart=99
-set foldnestmax=1
-set foldcolumn=1
+set foldcolumn=2
+autocmd FileType vim set foldmethod=marker
 
 " Window movement
 noremap <C-h> <C-w>h
@@ -65,23 +67,14 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" Use C syntax highlihting for *.h files
 let c_syntax_for_h = 1
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-highlightedyank
-
-let g:highlightedyank_highlight_duration = 200
+" }}}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" fzf
-
-noremap <C-p> :GFiles --cached --others --exclude-standard<CR>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color Scheme
+" Color Scheme {{{
 
 set termguicolors
 set background=dark
@@ -90,9 +83,11 @@ let g:gruvbox_material_palette = 'original'
 let g:gruvbox_material_disable_italic_comment = 1
 colorscheme gruvbox-material
 
+" }}}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
+" NERDTree {{{
 
 noremap <C-n> :NERDTreeToggle<CR>
 
@@ -102,9 +97,19 @@ let NERDTreeIgnore = [ '^\.git$[[dir]]', '\.o$[[file]]' ]
 let g:NERDTreeGitStatusShowIgnored = 1
 let g:NERDTreeGitStatusConcealBrackets = 1
 
+" }}}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" lightline.vim
+" vim-highlightedyank {{{
+
+let g:highlightedyank_highlight_duration = 200
+
+" }}}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" lightline.vim  {{{
 
 " Don't show the mode in the last line
 set noshowmode
@@ -116,34 +121,39 @@ let g:lightline = {
   \   'colorscheme': 'gruvbox_material',
   \   'active': {
   \     'left': [
-  \       [ 'mode', 'paste' ],
-  \       [ 'readonly', 'filename', 'modified' ],
-  \       [ 'cocstatus' ]
+  \       ['mode', 'paste'],
+  \       ['readonly', 'filename', 'modified'],
+  \       ['cocstatus'],
   \     ],
   \     'right': [
-  \       [ 'lineinfo' ],
-  \       [ 'percent' ],
-  \       [ 'filetype' ]
-  \     ]
+  \       ['lineinfo'],
+  \       ['percent'],
+  \       ['filetype'],
+  \     ],
   \   },
   \   'inactive': {
-  \     'left' : [ [ 'filename', 'modified' ] ]
+  \     'left': [
+  \       ['filename', 'modified']
+  \     ],
   \   },
   \   'component_function': {
-  \     'cocstatus': 'coc#status'
+  \     'cocstatus': 'coc#status',
   \   },
   \ }
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-lsp-cxx-highlight
-
-" Remove highlighting for struct fields
-autocmd User CocNvimInit highlight LspCxxHlGroupMemberVariable ctermfg=NONE guifg=NONE
+" }}}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" coc.nvim
+" fzf {{{
+
+noremap <C-p> :GFiles --cached --others --exclude-standard<CR>
+
+" }}}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" coc.nvim {{{
 
 " Change coc-rust-analyzer type hint color
 highlight! link CocRustTypeHint Comment
@@ -266,17 +276,13 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-" Note coc#float#scroll works on neovim >= 0.4.0 or vim >= 8.2.0750
-nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-
-" NeoVim-only mapping for visual mode scroll
-" Useful on signatureHelp after jump placeholder of snippet expansion
-if has('nvim')
-  vnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#nvim_scroll(1, 1) : "\<C-f>"
-  vnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#nvim_scroll(0, 1) : "\<C-b>"
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -315,3 +321,14 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" }}}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-lsp-cxx-highlight {{{
+
+" Remove highlighting for struct fields
+autocmd User CocNvimInit highlight LspCxxHlGroupMemberVariable ctermfg=NONE guifg=NONE
+
+" }}}
