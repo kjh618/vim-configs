@@ -7,14 +7,14 @@
 
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'sainnhe/gruvbox-material'
+Plug 'gruvbox-community/gruvbox'
 
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug 'machakann/vim-highlightedyank'
-
 Plug 'itchyny/lightline.vim'
+
+Plug 'machakann/vim-highlightedyank'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -79,9 +79,10 @@ let c_syntax_for_h = 1
 set termguicolors
 set background=dark
 
-let g:gruvbox_material_palette = 'original'
-let g:gruvbox_material_disable_italic_comment = 1
-colorscheme gruvbox-material
+let g:gruvbox_italic = 1
+let g:gruvbox_italicize_comments = 0
+let g:gruvbox_invert_selection = 0
+colorscheme gruvbox
 
 " }}}
 
@@ -101,14 +102,6 @@ let g:NERDTreeGitStatusConcealBrackets = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" vim-highlightedyank {{{
-
-let g:highlightedyank_highlight_duration = 200
-
-" }}}
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
 " lightline.vim  {{{
 
 " Don't show the mode in the last line
@@ -118,7 +111,7 @@ set noshowmode
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 let g:lightline = {
-  \   'colorscheme': 'gruvbox_material',
+  \   'colorscheme': 'gruvbox',
   \   'active': {
   \     'left': [
   \       ['mode', 'paste'],
@@ -140,6 +133,14 @@ let g:lightline = {
   \     'cocstatus': 'coc#status',
   \   },
   \ }
+
+" }}}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-highlightedyank {{{
+
+let g:highlightedyank_highlight_duration = 200
 
 " }}}
 
