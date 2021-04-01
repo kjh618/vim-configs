@@ -19,6 +19,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'rust-lang/rust.vim'
+
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
