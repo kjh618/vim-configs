@@ -1,0 +1,13 @@
+set highlightedyank
+
+set showmode
+set showcmd
+set number
+set relativenumber
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+set scrolloff=2
