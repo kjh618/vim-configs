@@ -1,12 +1,26 @@
-set highlightedyank
-
+" UI
+set number
 set showmode
 set showcmd
-set number
-set relativenumber
 
+" Editor UI
+set scrolloff=2
+
+" Search
 set incsearch
+"set hlsearch
 set ignorecase
 set smartcase
 
-set scrolloff=2
+" Plugins
+set highlightedyank
+
+" IdeaVim Specific Settings
+set ideastatusicon=gray
+
+" Mappings
+" Leader key
+let mapleader = " "
+
+" IDE
+map <leader>rn <Action>(RenameElement)
