@@ -59,17 +59,20 @@ set foldlevelstart=99
 set foldcolumn=2
 autocmd FileType vim set foldmethod=marker
 
+" Use C syntax highlihting for *.h files
+let c_syntax_for_h = 1
+
+" Leader key
+let mapleader = " "
+
 " Window movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Use C syntax highlihting for *.h files
-let c_syntax_for_h = 1
-
-" Leader key
-let mapleader = " "
+" Other mappings
+nnoremap <leader>h :nohlsearch<CR>
 
 " }}}
 
