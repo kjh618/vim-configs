@@ -6,6 +6,9 @@ set showcmd
 " Editor UI
 set scrolloff=2
 
+" Editor Behavior
+set clipboard+=unnamedplus
+
 " Search
 set incsearch
 "set hlsearch
@@ -24,3 +27,5 @@ let mapleader = " "
 
 " IDE
 map <leader>rn <Action>(RenameElement)
+map <leader>/ <Action>(Find)
+map <leader>:s <Action>(Replace)
