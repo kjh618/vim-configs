@@ -161,7 +161,7 @@ nnoremap <leader>p :GFiles --cached --others --exclude-standard<CR>
 " coc.nvim {{{
 
 " From Readme.md
-source coc.vim
+runtime coc.vim
 
 " Change coc-rust-analyzer type hint color
 highlight! link CocRustTypeHint Comment
