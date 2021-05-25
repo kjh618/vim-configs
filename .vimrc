@@ -48,19 +48,4 @@ set ignorecase
 set smartcase
 
 " Plugins
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
-
-" Mappings
-" Leader key
-let mapleader = " "
-
-" Window movement
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Other mappings
-nnoremap <leader>h :nohlsearch<CR>
+packadd! matchit

@@ -72,7 +72,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Other mappings
-nnoremap <leader>h :nohlsearch<CR>
+nnoremap <leader>n :nohlsearch<CR>
 
 " }}}
 
@@ -94,7 +94,7 @@ colorscheme gruvbox
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree {{{
 
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = [ '^\.git$[[dir]]', '\.o$[[file]]' ]
