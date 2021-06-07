@@ -1,4 +1,3 @@
 {
-    "clangd.semanticHighlighting": true,
-    "python.pythonPath": "python3",
+    "clangd.semanticHighlighting": true
 }
