@@ -34,6 +34,7 @@ call plug#end()
 
 " Line number
 set number
+set relativenumber
 
 " Mouse support
 set mouse=a
@@ -152,7 +153,7 @@ let g:highlightedyank_highlight_duration = 200
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " fzf {{{
 
-nnoremap <leader>p :GFiles --cached --others --exclude-standard<CR>
+nnoremap <leader>f :GFiles --cached --others --exclude-standard<CR>
 
 " }}}
 

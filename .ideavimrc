@@ -1,13 +1,11 @@
 " UI
 set number
+set relativenumber
 set showmode
 set showcmd
 
 " Editor UI
 set scrolloff=2
-
-" Editor Behavior
-set clipboard+=unnamedplus
 
 " Search
 set incsearch
@@ -28,4 +26,4 @@ let mapleader = " "
 " IDE
 map <leader>rn <Action>(RenameElement)
 map <leader>/ <Action>(Find)
-map <leader>:s <Action>(Replace)
+map <leader>s <Action>(Replace)

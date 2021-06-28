@@ -1,5 +1,7 @@
 " kjh's .vimrc
 
+" TODO: Change to Neovim defaults
+
 set nocompatible
 
 filetype plugin indent on
