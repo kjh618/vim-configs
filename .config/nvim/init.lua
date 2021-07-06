@@ -21,9 +21,8 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/playground'
 
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
-
   use 'simrat39/rust-tools.nvim'
+  use 'hrsh7th/nvim-compe'
 end)
 
 
@@ -54,7 +53,7 @@ opt.shiftwidth = 4
 opt.softtabstop = 4
 vim.cmd [[autocmd FileType lua setlocal shiftwidth=2 softtabstop=2]]
 
--- Search & substitute
+-- Search and substitute options
 opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = 'nosplit'
@@ -83,7 +82,7 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
 
 
 --------------------------------------------------
--- Tree Sitter
+-- Tree-sitter
 
 require('nvim-treesitter.configs').setup {
   highlight = { enable = true },

@@ -34,10 +34,9 @@ end
 --------------------------------------------------
 -- Lua
 
-local sumneko_lua_root_path = vim.fn.getenv("HOME") .. "/.local/bin/vscode-lua/extension/server/" -- Change to your sumneko root installation
-local sumneko_lua_binary_path = "bin/Linux/lua-language-server" -- Change to your OS specific output folder
+local sumneko_lua_path = vim.fn.getenv("HOME") .. "/.local/bin/vscode-lua/extension/server/"
 lspconfig.sumneko_lua.setup {
-  cmd = { sumneko_lua_root_path .. sumneko_lua_binary_path, '-E', sumneko_lua_root_path .. 'main.lua' },
+  cmd = { sumneko_lua_path .. "bin/Linux/lua-language-server", '-E', sumneko_lua_path .. 'main.lua' },
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -76,6 +75,8 @@ require('compe').setup {
     nvim_lsp = true,
   },
 }
+
+-- Map <Tab> and <S-Tab>
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
