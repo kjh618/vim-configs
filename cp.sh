@@ -1,9 +1,10 @@
 #!/bin/bash
 
+echo Vim
 cp -v .vimrc ~/
 
-cp -v init.vim ~/.config/nvim/
-cp -v coc.vim ~/.config/nvim/
-cp -v coc-settings.json ~/.config/nvim/
+echo Neovim
+cp -rv .config/nvim/ ~/.config/
 
+echo IdeaVim
 cp -v .ideavimrc ~/
