@@ -17,6 +17,12 @@ require('packer').startup(function(use)
   use 'liuchengxu/space-vim-theme'
   use 'tyrannicaltoucan/vim-deep-space'
 
+  use 'preservim/nerdtree'
+
+  use 'itchyny/lightline.vim'
+
+  use 'folke/which-key.nvim'
+
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
 
@@ -31,21 +37,29 @@ end)
 
 local opt = vim.opt
 
--- Line number
-opt.number = true
-opt.relativenumber = true
-
--- Always display sign column
-opt.signcolumn = 'yes'
-
 -- Enable mouse support
 opt.mouse = 'a'
 
--- Don't unload but instead hide buffers
-opt.hidden = true
+-- UI options
+opt.number = true
+opt.relativenumber = true
+opt.signcolumn = 'yes'
+opt.foldcolumn = '1'
+opt.showmode = false
+
+-- Highlight on yank
+vim.cmd [[
+  augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]]
 
 -- Keep a few lines visible around the cursor
 opt.scrolloff = 2
+
+-- Don't unload but instead hide buffers
+opt.hidden = true
 
 -- Use 4 spaces instead of a tab
 opt.expandtab = true
@@ -61,12 +75,8 @@ opt.inccommand = 'nosplit'
 -- Decrease update time
 opt.updatetime = 250
 
--- Colorscheme
-opt.termguicolors = true
-opt.background = 'dark'
---vim.g.gruvbox_material_palette = 'original'
---vim.g.everforest_background = 'hard'
-vim.cmd [[colorscheme sonokai]]
+-- Decreate timeoutlen
+opt.timeoutlen = 500
 
 
 --------------------------------------------------
@@ -82,12 +92,66 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
 
 
 --------------------------------------------------
+-- Colorscheme
+
+opt.termguicolors = true
+opt.background = 'dark'
+
+--vim.g.gruvbox_material_palette = 'original'
+--vim.g.everforest_background = 'hard'
+vim.cmd [[colorscheme sonokai]]
+
+
+--------------------------------------------------
+-- NERDTree
+
+vim.g.NERDTreeShowHidden = 1
+
+vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NERDTreeToggle<CR>', { noremap = true })
+
+
+--------------------------------------------------
+-- Lightline.vim
+
+vim.g.lightline = {
+  colorscheme = 'sonokai',
+  active = {
+    left = {
+      { 'mode', 'paste' },
+      { 'readonly', 'filename', 'modified' },
+    },
+    right = {
+      { 'lineinfo' },
+      { 'percent' },
+      { 'filetype' },
+    },
+  },
+  inactive = {
+    left = {
+      { 'filename', 'modified' },
+    },
+  },
+}
+
+
+--------------------------------------------------
+-- Which Key
+
+require('which-key').setup {}
+
+
+--------------------------------------------------
 -- Tree-sitter
 
 require('nvim-treesitter.configs').setup {
   highlight = { enable = true },
   playground = { enabled = true },
 }
+
+-- Fold options
+opt.foldlevelstart = 99
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 
 --------------------------------------------------
