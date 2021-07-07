@@ -21,7 +21,8 @@
 
 ### Python
 
-TODO
+1. https://github.com/microsoft/pyright#command-line
+2. https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pyright
 
 
 ### C

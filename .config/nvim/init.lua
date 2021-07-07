@@ -18,9 +18,7 @@ require('packer').startup(function(use)
   use 'tyrannicaltoucan/vim-deep-space'
 
   use 'preservim/nerdtree'
-
   use 'itchyny/lightline.vim'
-
   use 'folke/which-key.nvim'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -29,6 +27,7 @@ require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
   use 'hrsh7th/nvim-compe'
+  --use 'nvim-lua/completion-nvim'
 end)
 
 
@@ -75,7 +74,7 @@ opt.inccommand = 'nosplit'
 -- Decrease update time
 opt.updatetime = 250
 
--- Decreate timeoutlen
+-- Decrease timeoutlen
 opt.timeoutlen = 500
 
 
@@ -99,7 +98,7 @@ opt.background = 'dark'
 
 --vim.g.gruvbox_material_palette = 'original'
 --vim.g.everforest_background = 'hard'
-vim.cmd [[colorscheme sonokai]]
+vim.cmd [[colorscheme onedark]]
 
 
 --------------------------------------------------
@@ -111,10 +110,10 @@ vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NERDTreeToggle<CR>', { noremap = tru
 
 
 --------------------------------------------------
--- Lightline.vim
+-- Lightline
 
 vim.g.lightline = {
-  colorscheme = 'sonokai',
+  colorscheme = 'one',
   active = {
     left = {
       { 'mode', 'paste' },
