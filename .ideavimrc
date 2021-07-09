@@ -1,29 +1,44 @@
-" UI
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" kjh's .ideavimrc
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+
+set highlightedyank
+set surround
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Options
+
+" UI options
 set number
 set relativenumber
 set showmode
 set showcmd
 
-" Editor UI
+" Editor UI options
 set scrolloff=2
 
-" Search
+" Search options
 set incsearch
 "set hlsearch
 set ignorecase
 set smartcase
 
-" Plugins
-set highlightedyank
-
-" IdeaVim Specific Settings
+" IdeaVim specific options
 set ideastatusicon=gray
+set ideajoin
+set idearefactormode=keep
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
-" Leader key
+
 let mapleader = " "
 
-" IDE
-map <leader>rn <Action>(RenameElement)
-map <leader>/ <Action>(Find)
-map <leader>s <Action>(Replace)
+nmap <Leader>/ <Action>(Find)
+nmap <Leader>s <Action>(Replace)
+
+nmap <Leader>rn <Action>(RenameElement)
