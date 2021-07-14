@@ -36,6 +36,11 @@ end
 -- Lua
 
 local sumneko_lua_path = vim.fn.getenv('HOME') .. '/.local/bin/vscode-lua/extension/server/'
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 lspconfig.sumneko_lua.setup {
   cmd = { sumneko_lua_path .. 'bin/Linux/lua-language-server', '-E', sumneko_lua_path .. 'main.lua' },
   on_attach = on_attach,
@@ -43,16 +48,13 @@ lspconfig.sumneko_lua.setup {
     Lua = {
       runtime = {
         version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
+        path = runtime_path,
       },
       diagnostics = {
         globals = { 'vim' },
       },
       workspace = {
-        library = {
-          vim.fn.expand('$VIMRUNTIME/lua'),
-          vim.fn.expand('$VIMRUNTIME/lua/vim/lsp'),
-        },
+        library = vim.api.nvim_get_runtime_file('', true),
       },
     },
   },
