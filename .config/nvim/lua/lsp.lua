@@ -29,8 +29,6 @@ local on_attach = function(_, bufnr)
   --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>wa', '<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>wr', '<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>wl', '<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-
-  --require('completion').on_attach()
 end
 
 

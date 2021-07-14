@@ -19,6 +19,7 @@ require('packer').startup(function(use)
 
   use 'preservim/nerdtree'
   use 'itchyny/lightline.vim'
+  use 'dstein64/nvim-scrollview'
   use 'folke/which-key.nvim'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -27,7 +28,6 @@ require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
   use 'hrsh7th/nvim-compe'
-  --use 'nvim-lua/completion-nvim'
 end)
 
 
@@ -46,20 +46,6 @@ opt.signcolumn = 'yes'
 opt.foldcolumn = '1'
 opt.showmode = false
 
--- Highlight on yank
-vim.cmd [[
-  augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]]
-
--- Keep a few lines visible around the cursor
-opt.scrolloff = 2
-
--- Don't unload but instead hide buffers
-opt.hidden = true
-
 -- Use 4 spaces instead of a tab
 opt.expandtab = true
 opt.shiftwidth = 4
@@ -71,11 +57,28 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = 'nosplit'
 
+-- Persistent undo
+opt.undofile = true
+
+-- Don't unload but instead hide buffers
+opt.hidden = true
+
 -- Decrease update time
 opt.updatetime = 250
 
 -- Decrease timeoutlen
 opt.timeoutlen = 500
+
+-- Keep a few lines visible around the cursor
+opt.scrolloff = 2
+
+-- Highlight on yank
+vim.cmd [[
+  augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]]
 
 
 --------------------------------------------------
