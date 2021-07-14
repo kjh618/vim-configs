@@ -20,7 +20,11 @@ require('packer').startup(function(use)
   use 'preservim/nerdtree'
   use 'itchyny/lightline.vim'
   use 'dstein64/nvim-scrollview'
+
   use 'folke/which-key.nvim'
+
+  use 'tpope/vim-surround'
+  use 'tpope/vim-commentary'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
@@ -36,15 +40,52 @@ end)
 
 local opt = vim.opt
 
+
+-- UI
+
+-- Line number
+opt.number = true
+opt.relativenumber = true
+
+-- Keep a few lines visible around the cursor
+opt.scrolloff = 2
+
+-- Split positions
+opt.splitbelow = true
+opt.splitright = true
+
+-- Other UI options
+opt.foldcolumn = '1'
+opt.signcolumn = 'yes'
+opt.showmode = false
+
+-- Colorscheme
+opt.termguicolors = true
+opt.background = 'dark'
+--vim.g.gruvbox_material_palette = 'original'
+--vim.g.everforest_background = 'hard'
+vim.cmd [[colorscheme onedark]]
+
+
+-- Behavior
+
 -- Enable mouse support
 opt.mouse = 'a'
 
--- UI options
-opt.number = true
-opt.relativenumber = true
-opt.signcolumn = 'yes'
-opt.foldcolumn = '1'
-opt.showmode = false
+-- Don't unload but instead hide buffers
+opt.hidden = true
+
+-- Persistent undo
+opt.undofile = true
+
+-- Decrease update time
+opt.updatetime = 250
+
+-- Decrease mapping timeout length
+opt.timeoutlen = 500
+
+
+-- Text Editing
 
 -- Use 4 spaces instead of a tab
 opt.expandtab = true
@@ -56,21 +97,6 @@ vim.cmd [[autocmd FileType lua setlocal shiftwidth=2 softtabstop=2]]
 opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = 'nosplit'
-
--- Persistent undo
-opt.undofile = true
-
--- Don't unload but instead hide buffers
-opt.hidden = true
-
--- Decrease update time
-opt.updatetime = 250
-
--- Decrease timeoutlen
-opt.timeoutlen = 500
-
--- Keep a few lines visible around the cursor
-opt.scrolloff = 2
 
 -- Highlight on yank
 vim.cmd [[
@@ -91,17 +117,6 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
-
-
---------------------------------------------------
--- Colorscheme
-
-opt.termguicolors = true
-opt.background = 'dark'
-
---vim.g.gruvbox_material_palette = 'original'
---vim.g.everforest_background = 'hard'
-vim.cmd [[colorscheme onedark]]
 
 
 --------------------------------------------------
