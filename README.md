@@ -19,7 +19,13 @@
 2. https://github.com/simrat39/rust-tools.nvim
 
 
-### Python
+### Python (Jedi)
+
+1. https://github.com/pappasam/jedi-language-server
+2. https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jedi_language_server
+
+
+### Python (Pyright)
 
 1. https://github.com/microsoft/pyright#command-line
 2. https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#pyright
