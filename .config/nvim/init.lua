@@ -64,7 +64,8 @@ opt.termguicolors = true
 opt.background = 'dark'
 --vim.g.gruvbox_material_palette = 'original'
 --vim.g.everforest_background = 'hard'
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme sonokai]]
+vim.cmd [[autocmd ColorScheme sonokai highlight! link TSPunctBracket Fg | highlight! link TSPunctDelimiter Fg]]
 
 
 -- Behavior
@@ -118,6 +119,9 @@ vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
 
+-- Yank all to clipboard
+vim.api.nvim_set_keymap('n', '<Leader>ya', '<Cmd>%y+<CR>', { noremap = true })
+
 
 --------------------------------------------------
 -- NERDTree
@@ -161,8 +165,15 @@ require('which-key').setup {}
 -- Tree-sitter
 
 require('nvim-treesitter.configs').setup {
-  highlight = { enable = true },
-  playground = { enabled = true },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = {
+      python = true,
+    },
+  },
+  playground = {
+    enabled = true,
+  },
 }
 
 -- Fold options

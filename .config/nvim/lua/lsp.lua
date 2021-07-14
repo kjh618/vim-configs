@@ -72,7 +72,7 @@ require('rust-tools').setup {
 --------------------------------------------------
 -- Python
 
-lspconfig.jedi_language_server.setup {
+lspconfig.pyright.setup {
   on_attach = on_attach,
 }
 
