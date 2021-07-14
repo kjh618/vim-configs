@@ -8,10 +8,11 @@
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'navarasu/onedark.nvim'
+  -- Colorschemes
+  use 'sainnhe/sonokai'
   use 'sainnhe/gruvbox-material'
   use 'sainnhe/everforest'
-  use 'sainnhe/sonokai'
+  use 'navarasu/onedark.nvim'
   use 'arcticicestudio/nord-vim'
   use 'NTBBloodbath/doom-one.nvim'
   use 'liuchengxu/space-vim-theme'
