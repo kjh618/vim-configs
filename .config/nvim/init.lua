@@ -136,7 +136,7 @@ vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NERDTreeToggle<CR>', { noremap = tru
 -- Lightline
 
 vim.g.lightline = {
-  colorscheme = 'one',
+  colorscheme = 'sonokai',
   active = {
     left = {
       { 'mode', 'paste' },
