@@ -27,7 +27,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
 
   use 'neovim/nvim-lspconfig'
@@ -166,6 +166,7 @@ require('which-key').setup {}
 -- Tree-sitter
 
 require('nvim-treesitter.configs').setup {
+  ensure_installed = { 'lua', 'python', 'rust', 'toml', 'c', 'query' },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = {
