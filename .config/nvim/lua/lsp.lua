@@ -65,6 +65,12 @@ lspconfig.sumneko_lua.setup {
 -- Rust
 
 require('rust-tools').setup {
+  tools = {
+    inlay_hints = {
+      show_parameter_hints = false,
+      other_hints_prefix = ': ',
+    },
+  },
   server = {
     on_attach = on_attach,
   },
