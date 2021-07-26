@@ -55,6 +55,7 @@ lspconfig.sumneko_lua.setup {
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file('', true),
+        preloadFileSize = 200,
       },
     },
   },

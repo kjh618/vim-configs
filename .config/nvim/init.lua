@@ -166,7 +166,7 @@ require('which-key').setup {}
 -- Tree-sitter
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'lua', 'python', 'rust', 'toml', 'c', 'query' },
+  ensure_installed = { 'lua', 'rust', 'toml', 'python', 'c', 'query' },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = {
