@@ -92,6 +92,7 @@ vim.opt.completeopt = 'menuone,noselect'
 vim.opt.shortmess:append('c')
 
 require('compe').setup {
+  preselect = 'disable',
   source = {
     path = true,
     nvim_lsp = true,
