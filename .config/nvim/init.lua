@@ -22,7 +22,7 @@ require('packer').startup(function(use)
   use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
   use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
   use 'dstein64/nvim-scrollview'
-  use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+  use { 'hoob3rt/lualine.nvim', requires = { {'kyazdani42/nvim-web-devicons', opt = true } } }
   use 'folke/which-key.nvim'
 
   -- Text Editing
@@ -126,7 +126,7 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
 
 -- Yank all to clipboard
-vim.api.nvim_set_keymap('n', '<Leader>ya', '<Cmd>%y+<CR>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>ya', '<Cmd>%y+<CR>', { noremap = true })
 
 
 --------------------------------------------------
@@ -155,8 +155,8 @@ require('gitsigns').setup {
 require('lualine').setup {
   options = {
     theme = 'material',
-    component_separators = '',
     section_separators = '',
+    component_separators = '',
   },
   sections = {
     lualine_a = { 'mode' },
