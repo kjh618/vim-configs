@@ -21,6 +21,7 @@ require('packer').startup(function(use)
   use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
   use 'itchyny/lightline.vim'
   use 'dstein64/nvim-scrollview'
+  use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   use 'folke/which-key.nvim'
 
@@ -57,7 +58,7 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- Other UI options
-opt.foldcolumn = '1'
+-- opt.foldcolumn = '1'
 opt.signcolumn = 'yes'
 opt.showmode = false
 
@@ -158,6 +159,14 @@ vim.g.lightline = {
       { 'filename', 'modified' },
     },
   },
+}
+
+
+--------------------------------------------------
+-- Git Signs
+
+require('gitsigns').setup {
+  keymaps = {}
 }
 
 
