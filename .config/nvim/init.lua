@@ -152,8 +152,10 @@ require('gitsigns').setup {
 --------------------------------------------------
 -- Statusline
 
+local lualine_utils = require('lualine.utils.utils')
 require('lualine').setup {
   options = {
+    icons_enabled = false,
     theme = 'material',
     section_separators = '',
     component_separators = '',
@@ -165,7 +167,11 @@ require('lualine').setup {
       {
         'diagnostics',
         sources = { 'nvim_lsp' },
-        color_warn = '#ffdf00',
+        color_error = lualine_utils.extract_highlight_colors('LspDiagnosticsSignError', 'fg'),
+        color_warn = lualine_utils.extract_highlight_colors('LspDiagnosticsSignWarning', 'fg'),
+        color_info = lualine_utils.extract_highlight_colors('LspDiagnosticsSignInformation', 'fg'),
+        color_hint = lualine_utils.extract_highlight_colors('LspDiagnosticsSignHint', 'fg'),
+        symbols = { error = 'E', warn = 'W', info = 'I', hint = 'H' },
       },
     },
     lualine_x = { { 'filetype', colored = false } },
