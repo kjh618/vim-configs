@@ -18,7 +18,7 @@ require('packer').startup(function(use)
   -- use 'liuchengxu/space-vim-theme'
   -- use 'tyrannicaltoucan/vim-deep-space'
 
-  use 'preservim/nerdtree'
+  use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
   use 'itchyny/lightline.vim'
   use 'dstein64/nvim-scrollview'
 
@@ -126,15 +126,19 @@ vim.api.nvim_set_keymap('n', '<Leader>ya', '<Cmd>%y+<CR>', { noremap = true })
 
 
 --------------------------------------------------
--- NERDTree
+-- File Explorer
 
-vim.g.NERDTreeShowHidden = 1
+vim.g.nvim_tree_ignore = { '.git' }
+vim.g.nvim_tree_auto_close = 1
+vim.g.nvim_tree_lsp_diagnostics = 1
+vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_icons = { default = '' }
 
-vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NERDTreeToggle<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>', { noremap = true })
 
 
 --------------------------------------------------
--- Lightline
+-- Statusline
 
 vim.g.lightline = {
   colorscheme = 'sonokai',
