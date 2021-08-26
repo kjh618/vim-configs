@@ -19,9 +19,9 @@ require('packer').startup(function(use)
   -- use 'tyrannicaltoucan/vim-deep-space'
 
   use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
-  use 'itchyny/lightline.vim'
-  use 'dstein64/nvim-scrollview'
   use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use 'dstein64/nvim-scrollview'
+  use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 
   use 'folke/which-key.nvim'
 
@@ -139,34 +139,44 @@ vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>', { noremap = tru
 
 
 --------------------------------------------------
--- Statusline
-
-vim.g.lightline = {
-  colorscheme = 'sonokai',
-  active = {
-    left = {
-      { 'mode', 'paste' },
-      { 'readonly', 'filename', 'modified' },
-    },
-    right = {
-      { 'lineinfo' },
-      { 'percent' },
-      { 'filetype' },
-    },
-  },
-  inactive = {
-    left = {
-      { 'filename', 'modified' },
-    },
-  },
-}
-
-
---------------------------------------------------
 -- Git Signs
 
 require('gitsigns').setup {
   keymaps = {}
+}
+
+
+--------------------------------------------------
+-- Statusline
+
+require('lualine').setup {
+  options = {
+    theme = 'material',
+    component_separators = '',
+    section_separators = '',
+  },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'filename' },
+    lualine_c = {
+      {
+        'diagnostics',
+        sources = { 'nvim_lsp' },
+        color_warn = '#ffdf00',
+      },
+    },
+    lualine_x = { { 'filetype', colored = false } },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
+    lualine_y = {},
+    lualine_z = {}
+  },
 }
 
 
