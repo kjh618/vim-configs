@@ -18,19 +18,22 @@ require('packer').startup(function(use)
   -- use 'liuchengxu/space-vim-theme'
   -- use 'tyrannicaltoucan/vim-deep-space'
 
+  -- UI
   use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
   use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
   use 'dstein64/nvim-scrollview'
   use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-
   use 'folke/which-key.nvim'
 
+  -- Text Editing
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
 
+  -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
 
+  -- LSP
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
   use 'hrsh7th/nvim-cmp'
@@ -65,8 +68,8 @@ opt.showmode = false
 -- Colorscheme
 opt.termguicolors = true
 opt.background = 'dark'
---vim.g.gruvbox_material_palette = 'original'
---vim.g.everforest_background = 'hard'
+-- vim.g.gruvbox_material_palette = 'original'
+-- vim.g.everforest_background = 'hard'
 vim.cmd [[colorscheme sonokai]]
 vim.cmd [[autocmd ColorScheme sonokai highlight! link TSPunctBracket Fg | highlight! link TSPunctDelimiter Fg]]
 
@@ -139,7 +142,7 @@ vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>', { noremap = tru
 
 
 --------------------------------------------------
--- Git Signs
+-- Gitsigns
 
 require('gitsigns').setup {
   keymaps = {}
@@ -177,6 +180,7 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
+  extensions = { 'nvim-tree' }
 }
 
 
@@ -187,7 +191,7 @@ require('which-key').setup {}
 
 
 --------------------------------------------------
--- Tree-sitter
+-- Treesitter
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { 'lua', 'rust', 'toml', 'python', 'c', 'query' },
