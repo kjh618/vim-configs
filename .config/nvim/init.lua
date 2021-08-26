@@ -13,10 +13,10 @@ require('packer').startup(function(use)
   use 'sainnhe/gruvbox-material'
   use 'sainnhe/everforest'
   use 'navarasu/onedark.nvim'
-  use 'arcticicestudio/nord-vim'
-  use 'NTBBloodbath/doom-one.nvim'
-  use 'liuchengxu/space-vim-theme'
-  use 'tyrannicaltoucan/vim-deep-space'
+  -- use 'arcticicestudio/nord-vim'
+  -- use 'NTBBloodbath/doom-one.nvim'
+  -- use 'liuchengxu/space-vim-theme'
+  -- use 'tyrannicaltoucan/vim-deep-space'
 
   use 'preservim/nerdtree'
   use 'itchyny/lightline.vim'
@@ -32,7 +32,8 @@ require('packer').startup(function(use)
 
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
-  use 'hrsh7th/nvim-compe'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
 end)
 
 

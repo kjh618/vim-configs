@@ -3,13 +3,13 @@
 
 local lspconfig = require('lspconfig')
 
-local on_attach = function(_, bufnr)
+local function on_attach(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = true }
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-k>', [[compe#close() . "\<Cmd>lua vim.lsp.buf.signature_help()\<CR>"]], { noremap = true, expr = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -87,47 +87,40 @@ lspconfig.pyright.setup {
 
 
 --------------------------------------------------
--- Compe
+-- Autocompletion
 
 vim.opt.completeopt = 'menuone,noselect'
 vim.opt.shortmess:append('c')
 
-require('compe').setup {
-  preselect = 'disable',
-  source = {
-    path = true,
-    nvim_lsp = true,
+local cmp = require('cmp')
+cmp.setup {
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
   },
 }
-
-local function t(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local function is_prev_space()
-  local prev_col = vim.fn.col('.') - 1
-  return prev_col == 0 or vim.fn.getline('.'):sub(prev_col, prev_col):match('%s') ~= nil
-end
-
-function _G.tab_complete()
-  if vim.fn.pumvisible() == 1 then
-    return t '<C-n>'
-  elseif is_prev_space() then
-    return t '<Tab>'
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-
-function _G.s_tab_complete()
-  if vim.fn.pumvisible() == 1 then
-    return t '<C-p>'
-  else
-    return t '<S-Tab>'
-  end
-end
-
-vim.api.nvim_set_keymap('i', '<CR>', [[compe#confirm("<CR>")]], { noremap = true, expr = true })
-
-vim.api.nvim_set_keymap('i', '<Tab>', [[v:lua.tab_complete()]], { noremap = true, expr = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', [[v:lua.s_tab_complete()]], { noremap = true, expr = true })
