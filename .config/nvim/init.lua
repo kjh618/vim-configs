@@ -71,7 +71,12 @@ opt.background = 'dark'
 -- vim.g.gruvbox_material_palette = 'original'
 -- vim.g.everforest_background = 'hard'
 vim.cmd [[colorscheme sonokai]]
-vim.cmd [[autocmd ColorScheme sonokai highlight! link TSPunctBracket Fg | highlight! link TSPunctDelimiter Fg]]
+vim.cmd [[
+  augroup colorscheme_colors
+    autocmd!
+    autocmd ColorScheme sonokai highlight! link TSPunctBracket Fg | highlight! link TSPunctDelimiter Fg
+  augroup end
+]]
 
 
 -- Behavior
@@ -98,16 +103,21 @@ opt.timeoutlen = 500
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.softtabstop = 4
-vim.cmd [[autocmd FileType lua setlocal shiftwidth=2 softtabstop=2]]
+vim.cmd [[
+  augroup file_type_indentation
+    autocmd!
+    autocmd FileType lua setlocal shiftwidth=2 softtabstop=2
+  augroup end
+]]
 
 -- Search and substitute options
 opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = 'nosplit'
 
--- Highlight on yank
+-- Highlighted yank
 vim.cmd [[
-  augroup highlight_yank
+  augroup highlighted_yank
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
@@ -137,6 +147,16 @@ vim.g.nvim_tree_auto_close = 1
 vim.g.nvim_tree_lsp_diagnostics = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_icons = { default = '' }
+
+vim.cmd [[
+  augroup nvim_tree_colors
+    autocmd!
+    autocmd VimEnter * highlight! link NvimTreeLspDiagnosticsError LspDiagnosticsSignError
+    autocmd VimEnter * highlight! link NvimTreeLspDiagnosticsWarning LspDiagnosticsSignWarning
+    autocmd VimEnter * highlight! link NvimTreeLspDiagnosticsInformation LspDiagnosticsSignInformation
+    autocmd VimEnter * highlight! link NvimTreeLspDiagnosticsHint LspDiagnosticsSignHint
+  augroup end
+]]
 
 vim.api.nvim_set_keymap('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>', { noremap = true })
 
