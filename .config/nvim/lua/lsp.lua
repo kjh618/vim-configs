@@ -89,11 +89,12 @@ lspconfig.pyright.setup {
 --------------------------------------------------
 -- Autocompletion
 
-vim.opt.completeopt = 'menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
 vim.opt.shortmess:append('c')
 
 local cmp = require('cmp')
 cmp.setup {
+  preselect = cmp.PreselectMode.None,
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
