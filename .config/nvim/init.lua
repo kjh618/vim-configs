@@ -127,16 +127,7 @@ vim.cmd [[
 --------------------------------------------------
 -- Mappings
 
-vim.g.mapleader = " "
-
--- Window movements
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
-
--- Yank all to clipboard
--- vim.api.nvim_set_keymap('n', '<Leader>ya', '<Cmd>%y+<CR>', { noremap = true })
+require('mappings')
 
 
 --------------------------------------------------
@@ -220,7 +211,12 @@ require('which-key').setup {}
 -- Treesitter
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'lua', 'rust', 'toml', 'python', 'c', 'query' },
+  ensure_installed = {
+    'lua', 'query', 'comment',
+    'c', 'rust', 'toml', 'python',
+    'bash',
+    'html', 'css', 'javascript',
+  },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = {
