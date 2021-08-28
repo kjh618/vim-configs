@@ -87,6 +87,14 @@ lspconfig.pyright.setup {
 
 
 --------------------------------------------------
+-- Javascript/Typescript
+
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+}
+
+
+--------------------------------------------------
 -- Autocompletion
 
 vim.opt.completeopt = 'menu,menuone,noselect'
