@@ -23,5 +23,8 @@
 1. https://github.com/pappasam/jedi-language-server
 2. https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jedi_language_server
 
+### Javascript/Typescript
+1. https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
+
 ### C
 TODO
