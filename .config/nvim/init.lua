@@ -22,8 +22,10 @@ require('packer').startup(function(use)
   use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
   use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
   use 'dstein64/nvim-scrollview'
-  use { 'hoob3rt/lualine.nvim', requires = { {'kyazdani42/nvim-web-devicons', opt = true } } }
+  use { 'hoob3rt/lualine.nvim', requires = { { 'kyazdani42/nvim-web-devicons', opt = true } } }
+
   use 'folke/which-key.nvim'
+  use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   -- Text Editing
   use 'tpope/vim-surround'
@@ -205,6 +207,12 @@ require('lualine').setup {
 -- Which Key
 
 require('which-key').setup {}
+
+--------------------------------------------------
+-- Telescope
+
+vim.api.nvim_set_keymap('n', '<Leader>ff', [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>fg', [[<Cmd>lua require('telescope.builtin').live_grep()<Cr>]], { noremap = true })
 
 
 --------------------------------------------------
