@@ -42,3 +42,5 @@ nmap <Leader>/ <Action>(Find)
 nmap <Leader>s <Action>(Replace)
 
 nmap <Leader>rn <Action>(RenameElement)
+
+nmap gh <Action>(ShowErrorDescription)
