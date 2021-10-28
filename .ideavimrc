@@ -51,8 +51,9 @@ nmap <Leader>s <Action>(Replace)
 
 " IDE
 
+nmap K <Action>(QuickJavaDoc)
+nmap <Leader>t <Action>(Scala.TypeInfo)
+
 nmap <Leader>rn <Action>(RenameElement)
 
-nmap gh <Action>(ShowErrorDescription) " hover
-
-nmap <Leader>r <Action>(Run)
+nmap <Leader>d <Action>(ShowErrorDescription)
