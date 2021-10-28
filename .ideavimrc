@@ -39,9 +39,20 @@ set idearefactormode=keep
 
 let mapleader = " "
 
+" Window movements
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Search mappings
 nmap <Leader>/ <Action>(Find)
 nmap <Leader>s <Action>(Replace)
 
+" IDE
+
 nmap <Leader>rn <Action>(RenameElement)
 
-nmap gh <Action>(ShowErrorDescription)
+nmap gh <Action>(ShowErrorDescription) " hover
+
+nmap <Leader>r <Action>(Run)
