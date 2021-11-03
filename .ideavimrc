@@ -45,11 +45,15 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Map jump list movements to IDE actions
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
 " Search mappings
 nmap <Leader>/ <Action>(Find)
 nmap <Leader>s <Action>(Replace)
 
-" IDE
+" IDE actions
 
 nmap K <Action>(QuickJavaDoc)
 map <Leader>t <Action>(Scala.TypeInfo)
