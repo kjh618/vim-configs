@@ -28,6 +28,9 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Mapping options
+set timeoutlen=500
+
 " IdeaVim specific options
 set ideastatusicon=gray
 set ideajoin
@@ -52,12 +55,20 @@ nmap <C-i> <Action>(Forward)
 " Search mappings
 nmap <Leader>/ <Action>(Find)
 nmap <Leader>s <Action>(Replace)
+nmap <Leader>f/ <Action>(FindInPath)
 
 " IDE actions
 
-nmap K <Action>(QuickJavaDoc)
+map K <Action>(QuickJavaDoc)
 map <Leader>t <Action>(Scala.TypeInfo)
+map <Leader>p <Action>(ParameterInfo)
+imap <C-k> <Action>(ParameterInfo)
+
+"map gd <Action>(GotoDeclaration)
+map gD <Action>(GotoTypeDeclaration)
 
 nmap <Leader>rn <Action>(RenameElement)
 
-nmap <Leader>d <Action>(ShowErrorDescription)
+map <Leader>d <Action>(ShowErrorDescription)
+
+nmap <Leader>r <Action>(Run)
