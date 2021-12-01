@@ -42,6 +42,9 @@ set idearefactormode=keep
 
 let mapleader = " "
 
+" Neovim defaults
+nnoremap Y y$
+
 " Window movements
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
