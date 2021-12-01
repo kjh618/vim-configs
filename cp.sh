@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: Update
+
 echo Vim
 cp -v .vimrc ~/
 

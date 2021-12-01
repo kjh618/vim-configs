@@ -1,6 +1,8 @@
 --------------------------------------------------
 -- LSP Configs
 
+-- TODO: Update
+
 local lspconfig = require('lspconfig')
 
 local function on_attach(_, bufnr)
