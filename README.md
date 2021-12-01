@@ -1,5 +1,7 @@
 # Vim Configs
 
+TODO: Update
+
 ## Neovim Langauge Servers
 
 * https://github.com/neovim/nvim-lspconfig
