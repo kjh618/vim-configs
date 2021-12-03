@@ -74,4 +74,4 @@ nmap <Leader>rn <Action>(RenameElement)
 
 map <Leader>d <Action>(ShowErrorDescription)
 
-nmap <Leader>r <Action>(Run)
+nmap <F5> <Action>(Run)
