@@ -56,8 +56,8 @@ nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 
 " Search mappings
-nmap <Leader>/ <Action>(Find)
-nmap <Leader>s <Action>(Replace)
+map <Leader>/ <Action>(Find)
+map <Leader>s <Action>(Replace)
 nmap <Leader>f/ <Action>(FindInPath)
 
 " IDE actions
