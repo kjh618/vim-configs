@@ -1,11 +1,3 @@
---------------------------------------------------
--- kjh's init.lua with no plugins
-
-
---------------------------------------------------
--- Neovim Options
-
-
 -- UI
 
 -- Line number
@@ -47,28 +39,13 @@ vim.opt.timeoutlen = 500
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-vim.cmd [[
-  augroup file_type_indentation
-    autocmd!
-    autocmd FileType lua setlocal shiftwidth=2 softtabstop=2
-  augroup end
-]]
 
 -- Search and substitute options
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.inccommand = 'nosplit'
 
 -- Highlighted yank
-vim.cmd [[
-  augroup highlighted_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]]
-
-
---------------------------------------------------
--- Mappings
-
-require('mappings')
+vim.api.nvim_create_autocmd('TextYankPost', {
+    pattern = '*',
+    callback = function() vim.highlight.on_yank() end,
+})

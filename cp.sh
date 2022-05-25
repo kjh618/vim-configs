@@ -1,12 +1,7 @@
 #!/bin/sh
 
-# TODO: Update
-
-echo Vim
-cp -v .vimrc ~/
-
 echo Neovim
-cp -rv .config/nvim/ ~/.config/
+cp -R -v .config/nvim ~/.config/
 
 echo IdeaVim
 cp -v .ideavimrc ~/
