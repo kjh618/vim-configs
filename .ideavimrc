@@ -1,46 +1,39 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" kjh's .ideavimrc
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 
+" Map leader
+let mapleader = " "
+let maplocalleader = " "
+
+" Plugins
 set surround
 set commentary
 set highlightedyank
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Options
 
-" UI options
+" UI
 set number
-set relativenumber
 set showmode
 set showcmd
 
-" Editor UI options
+" Behavior
+set timeoutlen=500
 set scrolloff=2
 
 " Search options
 set incsearch
-"set hlsearch
 set ignorecase
 set smartcase
-
-" Mapping options
-set timeoutlen=500
 
 " IdeaVim specific options
 set ideastatusicon=gray
 set ideajoin
 set idearefactormode=keep
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
-
-let mapleader = " "
 
 " Neovim defaults
 nnoremap Y y$
@@ -55,23 +48,10 @@ nnoremap <C-l> <C-w>l
 nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 
-" Search mappings
-map <Leader>/ <Action>(Find)
-map <Leader>s <Action>(Replace)
-nmap <Leader>f/ <Action>(FindInPath)
-
 " IDE actions
-
-map K <Action>(QuickJavaDoc)
-map <Leader>t <Action>(Scala.TypeInfo)
-map <Leader>p <Action>(ParameterInfo)
+" See also: https://github.com/JetBrains/ideavim/blob/master/src/main/java/com/maddyhome/idea/vim/package-info.java
+nmap gD <Action>(GotoTypeDeclaration)
 imap <C-k> <Action>(ParameterInfo)
-
-"map gd <Action>(GotoDeclaration)
-map gD <Action>(GotoTypeDeclaration)
-
+map <Leader>t <Action>(Scala.TypeInfo)
+nmap <Leader>d <Action>(ShowErrorDescription)
 nmap <Leader>rn <Action>(RenameElement)
-
-map <Leader>d <Action>(ShowErrorDescription)
-
-nmap <F5> <Action>(Run)
