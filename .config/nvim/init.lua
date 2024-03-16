@@ -76,10 +76,53 @@ require("lazy").setup({
   -- Color schemes
   {
     "folke/tokyonight.nvim",
-    lazy = false,
     priority = 1000,
     config = function()
+      require("tokyonight").setup({
+        styles = {
+          keywords = { bold = true, italic = false },
+        },
+        on_highlights = function(hl, _)
+          hl.Statement["bold"] = true
+          hl["@keyword.function"]["bold"] = true
+        end,
+      })
       vim.cmd.colorscheme("tokyonight-moon")
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        styles = {
+          conditionals = { "bold" },
+          loops = { "bold" },
+          keywords = { "bold" },
+          miscs = {},
+        },
+      })
+      -- vim.cmd.colorscheme("catppuccin-macchiato")
+    end,
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      require("gruvbox").setup({
+        ---@diagnostic disable-next-line: missing-fields
+        italic = {
+          strings = false,
+        },
+        overrides = {
+          SignColumn = { link = "Normal" },
+          LspReferenceText = { link = "PmenuSbar" },
+          LspReferenceRead = { link = "PmenuSbar" },
+          LspReferenceWrite = { link = "PmenuSbar" },
+        },
+      })
+      -- vim.cmd.colorscheme("gruvbox")
     end,
   },
 
