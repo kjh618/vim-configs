@@ -73,13 +73,13 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
-  -- Color scheme
+  -- Color schemes
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("tokyonight")
+      vim.cmd.colorscheme("tokyonight-moon")
     end,
   },
 
@@ -107,6 +107,10 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
+      options = {
+        section_separators = "",
+        component_separators = "│",
+      },
       extensions = { "lazy", "neo-tree" },
     },
   },
@@ -242,7 +246,7 @@ require("lazy").setup({
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+        ensure_installed = { "bash", "c", "lua", "markdown", "python", "query", "rust", "toml", "vim", "vimdoc" },
         highlight = { enable = true },
         indent = { enable = true },
         incremental_selection = {
@@ -336,7 +340,7 @@ require("lazy").setup({
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" },
+        ensure_installed = { "lua_ls" }, -- + stylua
       })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
