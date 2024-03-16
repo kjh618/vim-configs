@@ -143,6 +143,7 @@ require("lazy").setup({
         },
       },
     },
+    -- TODO: buffer mappings
   },
 
   -- Status line
@@ -152,11 +153,13 @@ require("lazy").setup({
     opts = {
       options = {
         section_separators = "",
-        component_separators = "│",
+        component_separators = "|",
       },
       extensions = { "lazy", "neo-tree" },
     },
   },
+
+  -- TODO: nvim-navic
 
   -- Git signs
   {
@@ -198,6 +201,7 @@ require("lazy").setup({
           },
         },
       })
+      -- TODO: document_symbols
 
       vim.keymap.set("n", "<Leader>e", function()
         require("neo-tree.command").execute({ toggle = true })
@@ -217,6 +221,8 @@ require("lazy").setup({
     end,
   },
 
+  -- TODO: trouble.nvim?
+
   -- Indentation guides
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -235,6 +241,8 @@ require("lazy").setup({
       require("mini.comment").setup()
       require("mini.pairs").setup()
       require("mini.surround").setup()
+      -- TODO: mini.bufremove
+      -- TODO: mini.sessions?
     end,
   },
 
@@ -413,6 +421,8 @@ require("lazy").setup({
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
     end,
   },
+
+  -- TODO: rustaceanvim
 
   -- Completion
   {
