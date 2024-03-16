@@ -27,7 +27,7 @@ vim.opt.undofile = true
 
 -- Editing
 vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
 vim.opt.softtabstop = -1
 
 -- Search and subtitute
@@ -246,7 +246,19 @@ require("lazy").setup({
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "bash", "c", "lua", "markdown", "python", "query", "rust", "toml", "vim", "vimdoc" },
+        ensure_installed = {
+          "bash",
+          "c",
+          "lua",
+          "make",
+          "markdown",
+          "python",
+          "query",
+          "rust",
+          "toml",
+          "vim",
+          "vimdoc",
+        },
         highlight = { enable = true },
         indent = { enable = true },
         incremental_selection = {
@@ -299,6 +311,7 @@ require("lazy").setup({
           end,
         },
       },
+      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -340,22 +353,21 @@ require("lazy").setup({
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" }, -- + stylua
+        ensure_installed = { "clangd", "lua_ls", "pyright", "rust_analyzer" },
       })
+      -- + stylua
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local lspconfig = require("lspconfig")
 
-      require("lspconfig").lua_ls.setup({
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
-        capabilities = capabilities,
-      })
+      lspconfig.clangd.setup({ capabilities = capabilities })
+
+      lspconfig.lua_ls.setup({ capabilities = capabilities })
+
+      lspconfig.pyright.setup({ capabilities = capabilities })
+
+      lspconfig.rust_analyzer.setup({ capabilities = capabilities })
     end,
   },
 
@@ -430,3 +442,5 @@ require("lazy").setup({
     end,
   },
 })
+
+-- vim: shiftwidth=2
