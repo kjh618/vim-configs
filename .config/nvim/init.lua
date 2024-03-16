@@ -7,10 +7,16 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
+vim.opt.laststatus = 3
+vim.opt.showmode = false
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- Editor UI
 vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 5
 vim.opt.cursorline = true
+vim.opt.wrap = false
 vim.opt.breakindent = true
 
 -- Behavior
@@ -33,10 +39,15 @@ vim.opt.inccommand = "split"
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
 
 -- Window movements
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+
+-- Diagnostics
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Show [D]iagnostic messages" })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -72,6 +83,132 @@ require("lazy").setup({
     end,
   },
 
+  -- Buffer line
+  {
+    "akinsho/bufferline.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Explorer",
+            highlight = "Directory",
+            separator = true,
+          },
+        },
+      },
+    },
+  },
+
+  -- Status line
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      extensions = { "lazy", "neo-tree" },
+    },
+  },
+
+  -- Git signs
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {},
+  },
+
+  -- Scrollbar
+  {
+    "petertriho/nvim-scrollbar",
+    opts = {
+      handle = {
+        blend = 0,
+      },
+      handlers = {
+        gitsigns = true,
+      },
+    },
+  },
+
+  -- File explorer
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("neo-tree").setup({
+        auto_clean_after_session_restore = true,
+        close_if_last_window = true,
+        filesystem = {
+          filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_hidden = false,
+          },
+        },
+      })
+
+      vim.keymap.set("n", "<Leader>e", function()
+        require("neo-tree.command").execute({ toggle = true })
+      end, { desc = "Toggle [E]xplorer" })
+    end,
+  },
+
+  -- Which Key
+  {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup()
+
+      require("which-key").register({
+        ["<Leader>s"] = { name = "+[S]earch" },
+      })
+    end,
+  },
+
+  -- Indentation guides
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      indent = { char = "▏" },
+      scope = { enabled = false },
+    },
+  },
+
+  -- mini.nvim
+  {
+    "echasnovski/mini.nvim",
+    config = function()
+      require("mini.ai").setup({ n_lines = 500 })
+      require("mini.comment").setup()
+      require("mini.pairs").setup()
+      require("mini.surround").setup()
+    end,
+  },
+
+  -- Session management
+  {
+    "folke/persistence.nvim",
+    config = function()
+      require("persistence").setup({
+        options = vim.opt.sessionoptions:get(),
+      })
+
+      vim.api.nvim_create_autocmd("VimEnter", {
+        group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
+        callback = function()
+          require("persistence").load()
+        end,
+        nested = true,
+      })
+    end,
+  },
+
   -- Fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -83,14 +220,64 @@ require("lazy").setup({
         build = "make",
         enabled = vim.fn.executable("make") == 1,
       },
+      "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require("telescope").setup({})
       pcall(require("telescope").load_extension, "fzf")
 
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "[/] Search by Grep" })
+      vim.keymap.set("n", "<Leader>/", builtin.live_grep, { desc = "[/] Search by Grep" })
       vim.keymap.set("n", "<Leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+    end,
+  },
+
+  -- Tree sitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    build = ":TSUpdate",
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+        highlight = { enable = true },
+        indent = { enable = true },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "<C-Space>",
+            node_incremental = "<C-Space>",
+            scope_incremental = false,
+            node_decremental = "<BS>",
+          },
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+          move = {
+            enable = true,
+            goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+            goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+            goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+            goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+          },
+        },
+      })
+
+      vim.opt.foldlevel = 99
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     end,
   },
 
@@ -123,8 +310,11 @@ require("lazy").setup({
           map("n", "gy", require("telescope.builtin").lsp_type_definitions, "[G]oto T[y]pe Definition")
           map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-          map("n", "<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-          map("n", "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+          map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+          map("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
+          map("n", "<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+          map("n", "<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
           map("n", "K", vim.lsp.buf.hover, "Hover")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
@@ -165,20 +355,6 @@ require("lazy").setup({
     end,
   },
 
-  -- Formatter
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      format_on_save = {
-        lsp_fallback = true,
-        timeout_ms = 500,
-      },
-      formatters_by_ft = {
-        lua = { "stylua" },
-      },
-    },
-  },
-
   -- Completion
   {
     "hrsh7th/nvim-cmp",
@@ -194,11 +370,13 @@ require("lazy").setup({
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
+      "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      luasnip.config.setup({})
+      luasnip.config.setup()
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -209,28 +387,42 @@ require("lazy").setup({
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = cmp.mapping.confirm({ select = true }),
           ["<C-Space>"] = cmp.mapping.complete(),
         }),
-        sources = {
+        sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
+        }, {
+          { name = "buffer" },
+        }),
+        ---@diagnostic disable-next-line: missing-fields
+        formatting = {
+          format = require("lspkind").cmp_format({ mode = "symbol" }),
         },
       })
     end,
   },
 
-  -- Tree sitter
+  -- Formatter
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    "stevearc/conform.nvim",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-        highlight = { enable = true },
-        indent = { enable = true },
+      require("conform").setup({
+        format_on_save = {
+          lsp_fallback = true,
+          timeout_ms = 500,
+        },
+        formatters_by_ft = {
+          lua = { "stylua" },
+        },
       })
+
+      vim.opt.formatexpr = "v:lua.require('conform').formatexpr()"
     end,
   },
 })
