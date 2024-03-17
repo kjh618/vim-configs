@@ -355,6 +355,7 @@ require("lazy").setup({
               ["ic"] = "@class.inner",
             },
           },
+          -- TODO: Use mini.ai?
           move = {
             enable = true,
             goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
