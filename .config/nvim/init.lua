@@ -24,6 +24,7 @@ vim.opt.mouse = "a"
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 vim.opt.undofile = true
+vim.opt.sessionoptions:append("globals")
 
 -- Editing
 vim.opt.expandtab = true
@@ -45,8 +46,8 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
 -- Diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next [D]iagnostic message" })
 vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Show [D]iagnostic messages" })
 
 -- Highlight on yank
@@ -82,12 +83,15 @@ require("lazy").setup({
         styles = {
           keywords = { bold = true, italic = false },
         },
-        on_highlights = function(hl, _)
-          hl.Statement["bold"] = true
-          hl["@keyword.function"]["bold"] = true
+        on_highlights = function(highlights, colors)
+          highlights.Statement["bold"] = true
+          highlights["@keyword.function"]["bold"] = true
+          highlights.NeoTreeGitAdded = { fg = colors.green }
+          highlights.NeoTreeGitModified = { fg = colors.blue }
+          highlights.NeoTreeGitDeleted = { fg = colors.red }
         end,
       })
-      vim.cmd.colorscheme("tokyonight-moon")
+      vim.cmd.colorscheme("tokyonight")
     end,
   },
   {
@@ -130,20 +134,30 @@ require("lazy").setup({
   {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      options = {
-        diagnostics = "nvim_lsp",
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Explorer",
-            highlight = "Directory",
-            separator = true,
+    config = function()
+      require("bufferline").setup({
+        options = {
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "Explorer",
+              highlight = "Directory",
+              separator = true,
+            },
           },
+          close_command = function(bufnr)
+            MiniBufremove.delete(bufnr, false)
+          end,
+          right_mouse_command = "",
+          diagnostics = "nvim_lsp",
         },
-      },
-    },
-    -- TODO: buffer mappings
+      })
+
+      vim.keymap.set("n", "H", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
+      vim.keymap.set("n", "L", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+      vim.keymap.set("n", "<S-Left>", "<Cmd>BufferLineMovePrev<CR>", { desc = "Move buffer left" })
+      vim.keymap.set("n", "<S-Right>", "<Cmd>BufferLineMoveNext<CR>", { desc = "Move buffer right" })
+    end,
   },
 
   -- Status line
@@ -198,6 +212,7 @@ require("lazy").setup({
             visible = true,
             hide_dotfiles = false,
             hide_hidden = false,
+            hide_by_name = { ".git" },
           },
         },
       })
@@ -238,10 +253,18 @@ require("lazy").setup({
     "echasnovski/mini.nvim",
     config = function()
       require("mini.ai").setup({ n_lines = 500 })
+
+      require("mini.bufremove").setup()
+      vim.keymap.set("n", "<Leader>bd", function()
+        MiniBufremove.delete(0, false)
+      end, { desc = "[B]uffer [D]elete" })
+
       require("mini.comment").setup()
+
       require("mini.pairs").setup()
+
       require("mini.surround").setup()
-      -- TODO: mini.bufremove
+
       -- TODO: mini.sessions?
     end,
   },
@@ -375,7 +398,7 @@ require("lazy").setup({
           map("n", "gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
           map("n", "gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
           map("n", "gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-          map("n", "gy", require("telescope.builtin").lsp_type_definitions, "[G]oto T[y]pe Definition")
+          map("n", "gy", require("telescope.builtin").lsp_type_definitions, "[G]oto t[y]pe definition")
           map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
           map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
@@ -385,8 +408,8 @@ require("lazy").setup({
           map("n", "<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
           map("n", "K", vim.lsp.buf.hover, "Hover")
-          map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
-          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+          map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
+          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
