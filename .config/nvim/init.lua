@@ -248,6 +248,8 @@ require("lazy").setup({
     },
   },
 
+  -- TODO: UI plugin like dressing.nvim?
+
   -- mini.nvim
   {
     "echasnovski/mini.nvim",
@@ -440,7 +442,7 @@ require("lazy").setup({
 
       lspconfig.lua_ls.setup({ capabilities = capabilities })
 
-      lspconfig.pyright.setup({ capabilities = capabilities })
+      lspconfig.pyright.setup({ capabilities = capabilities }) -- TODO: Use another Python LSP
 
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
     end,
@@ -485,6 +487,7 @@ require("lazy").setup({
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
           ["<Tab>"] = cmp.mapping.confirm({ select = true }),
           ["<C-Space>"] = cmp.mapping.complete(),
+          -- TODO: Add mappings
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
@@ -512,6 +515,7 @@ require("lazy").setup({
         },
         formatters_by_ft = {
           lua = { "stylua" },
+          -- TODO: Add Python formatter
         },
       })
 
