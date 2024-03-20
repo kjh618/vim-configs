@@ -478,7 +478,7 @@ require("lazy").setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = "menu,menuone,noinsert" },
+        completion = { completeopt = "menu,menuone,noinsert" }, -- TODO: Set vim.opt?
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -500,6 +500,7 @@ require("lazy").setup({
         formatting = {
           format = require("lspkind").cmp_format({ mode = "symbol" }),
         },
+        -- TODO: Window border
       })
     end,
   },
