@@ -80,6 +80,7 @@ require("lazy").setup({
     "folke/tokyonight.nvim",
     priority = 1000,
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("tokyonight").setup({
         styles = {
           keywords = { bold = true, italic = false },
@@ -249,8 +250,9 @@ require("lazy").setup({
     },
   },
 
-  -- TODO: UI plugin like dressing.nvim?
+  -- TODO: dressing.nvim?
 
+  -- Noice
   {
     "folke/noice.nvim",
     dependencies = {
@@ -269,8 +271,15 @@ require("lazy").setup({
         signature = {
           opts = {
             size = {
-              max_height = 2,
+              max_height = 1,
             },
+          },
+        },
+      },
+      views = {
+        mini = {
+          position = {
+            row = -2,
           },
         },
       },
@@ -509,14 +518,14 @@ require("lazy").setup({
         },
         completion = { completeopt = "menu,menuone,noinsert" },
         mapping = cmp.mapping.preset.insert({
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
           ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          -- TODO: Add mappings
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
