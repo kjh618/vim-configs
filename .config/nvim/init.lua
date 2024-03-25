@@ -476,7 +476,10 @@ require("lazy").setup({
 
       local lspconfig = require("lspconfig")
 
-      lspconfig.clangd.setup({ capabilities = capabilities })
+      lspconfig.clangd.setup({
+        cmd = { "clangd", "--function-arg-placeholders=false" },
+        capabilities = capabilities,
+      })
 
       lspconfig.lua_ls.setup({ capabilities = capabilities })
 
