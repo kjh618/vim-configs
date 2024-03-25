@@ -30,6 +30,7 @@ vim.opt.sessionoptions:append("globals")
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = -1
+vim.opt.completeopt = "menu,menuone,noinsert"
 
 -- Search and subtitute
 vim.opt.ignorecase = true
@@ -250,6 +251,32 @@ require("lazy").setup({
 
   -- TODO: UI plugin like dressing.nvim?
 
+  {
+    "folke/noice.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+      cmdline = { enabled = false },
+      messages = { enabled = false },
+      popupmenu = { enabled = false },
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        signature = {
+          opts = {
+            size = {
+              max_height = 2,
+            },
+          },
+        },
+      },
+    },
+  },
+
   -- mini.nvim
   {
     "echasnovski/mini.nvim",
@@ -328,8 +355,10 @@ require("lazy").setup({
           "lua",
           "make",
           "markdown",
+          "markdown_inline",
           "python",
           "query",
+          "regex",
           "rust",
           "toml",
           "vim",
@@ -388,7 +417,6 @@ require("lazy").setup({
           end,
         },
       },
-      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -436,6 +464,7 @@ require("lazy").setup({
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
       local lspconfig = require("lspconfig")
 
       lspconfig.clangd.setup({ capabilities = capabilities })
@@ -478,7 +507,7 @@ require("lazy").setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = "menu,menuone,noinsert" }, -- TODO: Set vim.opt?
+        completion = { completeopt = "menu,menuone,noinsert" },
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -500,7 +529,6 @@ require("lazy").setup({
         formatting = {
           format = require("lspkind").cmp_format({ mode = "symbol" }),
         },
-        -- TODO: Window border
       })
     end,
   },
