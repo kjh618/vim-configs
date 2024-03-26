@@ -361,6 +361,7 @@ require("lazy").setup({
         ensure_installed = {
           "bash",
           "c",
+          "cpp",
           "lua",
           "make",
           "markdown",
