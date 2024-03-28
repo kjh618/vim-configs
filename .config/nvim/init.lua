@@ -216,6 +216,10 @@ require("lazy").setup({
             hide_hidden = false,
             hide_by_name = { ".git" },
           },
+          follow_current_file = {
+            enabled = true,
+            leave_dirs_open = true,
+          },
         },
       })
       -- TODO: document_symbols
