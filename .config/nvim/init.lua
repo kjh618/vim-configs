@@ -497,7 +497,21 @@ require("lazy").setup({
   {
     "mrcjkb/rustaceanvim",
     version = "^4",
-    ft = { "rust" },
+    config = function()
+      vim.g.rustaceanvim = {
+        server = {
+          default_settings = {
+            ["rust-analyzer"] = {
+              completion = {
+                callable = {
+                  snippets = "add_parentheses",
+                },
+              },
+            },
+          },
+        },
+      }
+    end,
   },
 
   -- Completion
