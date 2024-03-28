@@ -346,7 +346,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<Leader>/", builtin.live_grep, { desc = "[/] Search by Grep" })
       vim.keymap.set("n", "<Leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-      vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+      vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope" })
     end,
   },
 
@@ -442,15 +442,20 @@ require("lazy").setup({
           map("n", "gy", require("telescope.builtin").lsp_type_definitions, "[G]oto t[y]pe definition")
           map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-          map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-          map("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+          map("n", "K", vim.lsp.buf.hover, "Hover")
+          map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
+          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
           map("n", "<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
           map("n", "<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-          map("n", "K", vim.lsp.buf.hover, "Hover")
-          map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
-          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+          map("n", "<leader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch document [S]ymbols")
+          map(
+            "n",
+            "<leader>sS",
+            require("telescope.builtin").lsp_dynamic_workspace_symbols,
+            "[S]earch workspace [S]ymbols"
+          )
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
@@ -468,7 +473,7 @@ require("lazy").setup({
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "clangd", "lua_ls", "pyright", "rust_analyzer" },
+        ensure_installed = { "clangd", "lua_ls", "pyright" },
       })
       -- + stylua
 
@@ -485,12 +490,15 @@ require("lazy").setup({
       lspconfig.lua_ls.setup({ capabilities = capabilities })
 
       lspconfig.pyright.setup({ capabilities = capabilities }) -- TODO: Use another Python LSP
-
-      lspconfig.rust_analyzer.setup({ capabilities = capabilities })
     end,
   },
 
-  -- TODO: rustaceanvim
+  -- Rust
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    ft = { "rust" },
+  },
 
   -- Completion
   {
