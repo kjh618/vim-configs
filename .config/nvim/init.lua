@@ -351,6 +351,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<Leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
       vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope" })
+      -- TODO: Adjust keymaps
     end,
   },
 
@@ -460,6 +461,7 @@ require("lazy").setup({
             require("telescope.builtin").lsp_dynamic_workspace_symbols,
             "[S]earch workspace [S]ymbols"
           )
+          -- TODO: Adjust keymaps
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
