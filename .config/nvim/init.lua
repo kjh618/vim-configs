@@ -16,7 +16,6 @@ vim.opt.splitbelow = true
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 vim.opt.cursorline = true
-vim.opt.wrap = false
 vim.opt.breakindent = true
 
 -- Behavior
