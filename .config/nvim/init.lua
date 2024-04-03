@@ -347,11 +347,23 @@ require("lazy").setup({
       pcall(require("telescope").load_extension, "fzf")
 
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<Leader>/", builtin.live_grep, { desc = "[/] Search by Grep" })
+      local utils = require("telescope.utils")
+
+      vim.keymap.set("n", "<Leader>sg", function()
+        builtin.live_grep({ prompt_title = "Live Grep (relative)", cwd = utils.buffer_dir() })
+      end, { desc = "[S]earch by [G]rep (relative)" })
+      vim.keymap.set("n", "<Leader>sG", function()
+        builtin.live_grep({ prompt_title = "Live Grep (cwd)" })
+      end, { desc = "[S]earch by [G]rep (cwd)" })
+
       vim.keymap.set("n", "<Leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+
+      vim.keymap.set("n", "<leader>sd", function()
+        builtin.diagnostics({ bufnr = 0 })
+      end, { desc = "[S]earch [D]iagnostics (document)" })
+      vim.keymap.set("n", "<leader>sD", builtin.diagnostics, { desc = "[S]earch [D]iagnostics (workspace)" })
+
       vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope" })
-      -- TODO: Adjust keymaps
     end,
   },
 
@@ -454,14 +466,13 @@ require("lazy").setup({
           map("n", "<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
           map("n", "<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-          map("n", "<leader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch document [S]ymbols")
+          map("n", "<leader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch [S]ymbols (document)")
           map(
             "n",
             "<leader>sS",
             require("telescope.builtin").lsp_dynamic_workspace_symbols,
-            "[S]earch workspace [S]ymbols"
+            "[S]earch [S]ymbols (workspace)"
           )
-          -- TODO: Adjust keymaps
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
@@ -506,6 +517,15 @@ require("lazy").setup({
     config = function()
       vim.g.rustaceanvim = {
         server = {
+          on_attach = function(_, bufnr)
+            local function map(mode, keys, func, desc)
+              vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP (Rust): " .. desc })
+            end
+
+            map("v", "K", function()
+              vim.cmd.RustLsp({ "hover", "range" })
+            end, "Hover range")
+          end,
           default_settings = {
             ["rust-analyzer"] = {
               completion = {
