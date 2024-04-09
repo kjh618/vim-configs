@@ -236,7 +236,7 @@ require("lazy").setup({
       require("which-key").setup()
 
       require("which-key").register({
-        ["<Leader>s"] = { name = "+[S]earch" },
+        ["<Leader>f"] = { name = "+[F]ind" },
       })
     end,
   },
@@ -348,21 +348,21 @@ require("lazy").setup({
       local builtin = require("telescope.builtin")
       local utils = require("telescope.utils")
 
-      vim.keymap.set("n", "<Leader>sg", function()
+      vim.keymap.set("n", "<Leader>fg", function()
         builtin.live_grep({ prompt_title = "Live Grep (relative)", cwd = utils.buffer_dir() })
-      end, { desc = "[S]earch by [G]rep (relative)" })
-      vim.keymap.set("n", "<Leader>sG", function()
+      end, { desc = "[F]ind by [G]rep (relative)" })
+      vim.keymap.set("n", "<Leader>fG", function()
         builtin.live_grep({ prompt_title = "Live Grep (cwd)" })
-      end, { desc = "[S]earch by [G]rep (cwd)" })
+      end, { desc = "[F]ind by [G]rep (cwd)" })
 
-      vim.keymap.set("n", "<Leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+      vim.keymap.set("n", "<Leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 
-      vim.keymap.set("n", "<leader>sd", function()
+      vim.keymap.set("n", "<leader>fd", function()
         builtin.diagnostics({ bufnr = 0 })
-      end, { desc = "[S]earch [D]iagnostics (document)" })
-      vim.keymap.set("n", "<leader>sD", builtin.diagnostics, { desc = "[S]earch [D]iagnostics (workspace)" })
+      end, { desc = "[F]ind [D]iagnostics (document)" })
+      vim.keymap.set("n", "<leader>fD", builtin.diagnostics, { desc = "[F]ind [D]iagnostics (workspace)" })
 
-      vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope" })
+      vim.keymap.set("n", "<leader>ft", builtin.builtin, { desc = "[F]ind [T]elescope" })
     end,
   },
 
@@ -465,12 +465,12 @@ require("lazy").setup({
           map("n", "<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
           map("n", "<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-          map("n", "<leader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch [S]ymbols (document)")
+          map("n", "<leader>fs", require("telescope.builtin").lsp_document_symbols, "[F]ind [S]ymbols (document)")
           map(
             "n",
-            "<leader>sS",
+            "<leader>fS",
             require("telescope.builtin").lsp_dynamic_workspace_symbols,
-            "[S]earch [S]ymbols (workspace)"
+            "[F]ind [S]ymbols (workspace)"
           )
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
