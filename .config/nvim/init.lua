@@ -489,7 +489,7 @@ require("lazy").setup({
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "clangd", "lua_ls", "pyright" },
+        ensure_installed = { "clangd", "lua_ls", "pylsp" },
       })
       -- + stylua
 
@@ -505,7 +505,7 @@ require("lazy").setup({
 
       lspconfig.lua_ls.setup({ capabilities = capabilities })
 
-      lspconfig.pyright.setup({ capabilities = capabilities }) -- TODO: Use another Python LSP
+      lspconfig.pylsp.setup({ capabilities = capabilities })
     end,
   },
 
@@ -604,7 +604,6 @@ require("lazy").setup({
         },
         formatters_by_ft = {
           lua = { "stylua" },
-          -- TODO: Add Python formatter
         },
       })
 
