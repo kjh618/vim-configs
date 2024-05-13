@@ -391,7 +391,7 @@ require("lazy").setup({
           "vimdoc",
         },
         highlight = { enable = true },
-        indent = { enable = true },
+        indent = { enable = true }, -- TODO: Fix C switch case indent
         incremental_selection = {
           enable = true,
           keymaps = {
