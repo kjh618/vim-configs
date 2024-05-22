@@ -36,7 +36,6 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.inccommand = "split"
-
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
 
 -- Window movements
@@ -46,8 +45,6 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
 -- Diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next [D]iagnostic message" })
 vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, { desc = "Show [D]iagnostic messages" })
 
 -- Highlight on yank
@@ -70,7 +67,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
@@ -300,8 +297,6 @@ require("lazy").setup({
         MiniBufremove.delete(0, false)
       end, { desc = "[B]uffer [D]elete" })
 
-      require("mini.comment").setup()
-
       require("mini.pairs").setup()
 
       require("mini.surround").setup()
@@ -458,7 +453,6 @@ require("lazy").setup({
           map("n", "gy", require("telescope.builtin").lsp_type_definitions, "[G]oto t[y]pe definition")
           map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-          map("n", "K", vim.lsp.buf.hover, "Hover")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
@@ -563,6 +557,7 @@ require("lazy").setup({
       luasnip.config.setup()
       cmp.setup({
         snippet = {
+          -- TODO: Use native snippets
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
