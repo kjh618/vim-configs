@@ -447,10 +447,12 @@ require("lazy").setup({
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("n", "gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-          map("n", "gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-          map("n", "gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-          map("n", "gy", require("telescope.builtin").lsp_type_definitions, "[G]oto t[y]pe definition")
+          local telescope = require("telescope.builtin")
+
+          map("n", "gd", telescope.lsp_definitions, "[G]oto [D]efinition")
+          map("n", "gr", telescope.lsp_references, "[G]oto [R]eferences")
+          map("n", "gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
+          map("n", "gy", telescope.lsp_type_definitions, "[G]oto t[y]pe definition")
           map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
           map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
@@ -459,16 +461,11 @@ require("lazy").setup({
           map("n", "<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
           map("n", "<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-          map("n", "<leader>fs", require("telescope.builtin").lsp_document_symbols, "[F]ind [S]ymbols (document)")
-          map(
-            "n",
-            "<leader>fS",
-            require("telescope.builtin").lsp_dynamic_workspace_symbols,
-            "[F]ind [S]ymbols (workspace)"
-          )
+          map("n", "<leader>fs", telescope.lsp_document_symbols, "[F]ind [S]ymbols (document)")
+          map("n", "<leader>fS", telescope.lsp_dynamic_workspace_symbols, "[F]ind [S]ymbols (workspace)")
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.server_capabilities.documentHighlightProvider then
+          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
               callback = vim.lsp.buf.document_highlight,
@@ -537,15 +534,6 @@ require("lazy").setup({
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      {
-        "L3MON4D3/LuaSnip",
-        build = (function()
-          if vim.fn.has("win32") == 0 and vim.fn.executable("make") == 1 then
-            return "make install_jsregexp"
-          end
-        end)(),
-      },
-      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
@@ -553,15 +541,7 @@ require("lazy").setup({
     },
     config = function()
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      luasnip.config.setup()
       cmp.setup({
-        snippet = {
-          -- TODO: Use native snippets
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
         completion = { completeopt = "menu,menuone,noinsert" },
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
@@ -575,7 +555,6 @@ require("lazy").setup({
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "path" },
         }, {
           { name = "buffer" },
