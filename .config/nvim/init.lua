@@ -1,3 +1,6 @@
+-- TODO: Neovide keymaps
+-- TODO: Inlay hints
+
 -- Map leaders
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
