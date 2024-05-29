@@ -2,6 +2,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Neovide
+if vim.g.neovide then
+  vim.g.neovide_cursor_animation_length = 0
+end
+
 -- UI
 vim.opt.termguicolors = true
 vim.opt.number = true
@@ -11,6 +16,7 @@ vim.opt.laststatus = 3
 vim.opt.showmode = false
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.guifont = "Hack Nerd Font:h15"
 
 -- Editor UI
 vim.opt.scrolloff = 5
