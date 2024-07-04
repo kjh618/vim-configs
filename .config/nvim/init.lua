@@ -33,10 +33,10 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
 
 -- Window movements
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { remap = true, desc = "Move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { remap = true, desc = "Move to lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { remap = true, desc = "Move to upper window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { remap = true, desc = "Move to right window" })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
