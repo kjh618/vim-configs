@@ -32,6 +32,10 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
 
+-- Motions
+vim.keymap.set("n", "j", "gj", { remap = true, desc = "Move down" })
+vim.keymap.set("n", "k", "gk", { remap = true, desc = "Move up" })
+
 -- Window movements
 vim.keymap.set("n", "<C-h>", "<C-w>h", { remap = true, desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { remap = true, desc = "Move to lower window" })
