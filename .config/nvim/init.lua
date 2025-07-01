@@ -20,6 +20,7 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.clipboard = "unnamedplus"
 
 -- Editing
 vim.opt.expandtab = true
