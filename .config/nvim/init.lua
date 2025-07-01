@@ -4,6 +4,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Clipboard
+vim.g.clipboard = vim.g.vscode_clipboard
+
 -- UI
 vim.opt.termguicolors = true
 vim.opt.number = true
